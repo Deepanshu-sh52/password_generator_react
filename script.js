@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useCallback, useEffect,useState} from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 
 function PasswordGenerator(){
@@ -7,8 +7,8 @@ function PasswordGenerator(){
     const[numberinclude,setnumberinclude]=useState(false);
     const[symbolinclude,setsymbolinclude]=useState(false);
     
-    function generatepassword(){
-        let charlist="abcdefghijklmnopqrstuvwxyz";
+    const generatepassword=useCallback(()=>{
+         let charlist="abcdefghijklmnopqrstuvwxyz";
         if(symbolinclude){
             charlist=charlist+"!@#$%^&*()";
         }
@@ -21,7 +21,7 @@ function PasswordGenerator(){
             pass+=charlist[Math.floor(Math.random()*charlist.length)]
         }
         setpassword(pass);
-    }
+    },[length,numberinclude,symbolinclude])
    
     useEffect(()=>{
         generatepassword();

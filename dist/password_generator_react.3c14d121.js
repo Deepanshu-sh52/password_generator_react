@@ -734,14 +734,18 @@ function PasswordGenerator() {
     const [length, setlength] = (0, _react.useState)(10);
     const [numberinclude, setnumberinclude] = (0, _react.useState)(false);
     const [symbolinclude, setsymbolinclude] = (0, _react.useState)(false);
-    function generatepassword() {
+    const generatepassword = (0, _react.useCallback)(()=>{
         let charlist = "abcdefghijklmnopqrstuvwxyz";
         if (symbolinclude) charlist = charlist + "!@#$%^&*()";
         if (numberinclude) charlist = charlist + "1234567890";
         let pass = "";
         for(let i = 0; i < length; i++)pass += charlist[Math.floor(Math.random() * charlist.length)];
         setpassword(pass);
-    }
+    }, [
+        length,
+        numberinclude,
+        symbolinclude
+    ]);
     (0, _react.useEffect)(()=>{
         generatepassword();
     }, [
@@ -826,7 +830,7 @@ function PasswordGenerator() {
         ]
     }, void 0, true);
 }
-_s(PasswordGenerator, "pl2MA/GKd6VxRh6XL89gfESeVA8=");
+_s(PasswordGenerator, "f+NBJETBriXiFAKiErY8ePKmA4E=");
 _c = PasswordGenerator;
 (0, _client.createRoot)(document.getElementById("root")).render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(PasswordGenerator, {}, void 0, false, {
     fileName: "script.js",
